@@ -1,0 +1,149 @@
+:root {
+  --mesa: #2b2d33;
+  --papel: #fbfaf5;
+  --tinta: #22222a;
+  --azul: #1f4fd8;
+  --laranja: #d9730d;
+  --vermelho: #c4122f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--mesa);
+  background-image: radial-gradient(circle at 20% 10%, #3a3d46 0, transparent 55%);
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  color: var(--tinta);
+  padding: 2rem 1rem 4rem;
+}
+
+main { display: flex; justify-content: center; }
+
+/* O papel da nota */
+.recibo {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--papel);
+  padding: 2rem 1.6rem 1.6rem;
+  margin-bottom: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+/* borda serrilhada embaixo */
+.recibo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -14px;
+  height: 14px;
+  background:
+    linear-gradient(135deg, var(--papel) 25%, transparent 25%) -7px 0,
+    linear-gradient(225deg, var(--papel) 25%, transparent 25%) -7px 0;
+  background-size: 14px 14px;
+}
+
+header { text-align: center; }
+h1 { margin: 0; font-size: 2rem; letter-spacing: .15em; }
+header p { margin: .2rem 0 0; }
+.mini { font-size: .75rem; color: #6a6a74; }
+.centro { text-align: center; }
+
+hr { border: 0; border-top: 2px dashed var(--tinta); margin: 1.2rem 0; }
+
+label { display: block; font-weight: 700; margin-bottom: .5rem; }
+
+.linha { display: flex; gap: .6rem; }
+
+input {
+  width: 6ch;
+  flex: none;
+  font: inherit;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--tinta);
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid var(--tinta);
+  border-radius: 0;
+}
+input:focus { outline: 0; background: #fff3b8; }
+
+button {
+  flex: 1;
+  font: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--papel);
+  background: var(--tinta);
+  border: 0;
+  padding: .7rem .5rem;
+  cursor: pointer;
+}
+button:hover { background: #000; }
+button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* Linhas de item com pontilhado */
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: .4rem;
+  opacity: 0;
+  animation: imprimir .35s ease-out forwards;
+}
+.item .pontos { flex: 1; border-bottom: 2px dotted #9a9aa4; transform: translateY(-4px); }
+.item .valor { font-weight: 700; }
+.item.total { margin-top: .6rem; padding-top: .6rem; border-top: 2px solid var(--tinta); font-size: 1.1rem; }
+
+@keyframes imprimir {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Carimbo */
+#selo { text-align: center; }
+#selo:empty { display: none; }
+.carimbo {
+  display: inline-block;
+  margin: 1.4rem 0 .4rem;
+  padding: .3rem 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  border: 4px solid currentColor;
+  border-radius: 6px;
+  transform: rotate(-6deg);
+  opacity: .88;
+  animation: carimbar .3s .5s backwards cubic-bezier(.3, 1.6, .5, 1);
+}
+.carimbo.ok { color: var(--azul); }
+.carimbo.medio { color: var(--laranja); }
+.carimbo.alto { color: var(--vermelho); }
+
+@keyframes carimbar {
+  from { transform: rotate(-6deg) scale(2.2); opacity: 0; }
+}
+
+#resultado { margin-top: 1rem; }
+#resultado:empty { display: none; }
+#resultado.erro { color: var(--vermelho); font-weight: 700; }
+
+/* código de barras decorativo */
+.codigo {
+  height: 46px;
+  background: repeating-linear-gradient(90deg,
+    var(--tinta) 0 2px, transparent 2px 5px,
+    var(--tinta) 5px 9px, transparent 9px 11px,
+    var(--tinta) 11px 12px, transparent 12px 16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item, .carimbo { animation: none; opacity: 1; }
+}

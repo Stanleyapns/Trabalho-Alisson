@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de Hábitos Digitais 3C</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <article class="recibo">
+      <header>
+        <h1>TEMPO S.A.</h1>
+        <p>Nota fiscal dos seus hábitos digitais</p>
+        <p class="mini">Projeto 3C · Cliente: você</p>
+      </header>
+
+      <hr>
+
+      <div class="pedido">
+        <label for="horas">Horas por dia nas redes sociais</label>
+        <div class="linha">
+          <input type="number" id="horas" min="0" max="24" step="0.5" placeholder="0">
+          <button id="botao">Emitir nota</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <div id="itens"></div>
+      <div id="selo"></div>
+
+      <div id="resultado" aria-live="polite"></div>
+
+      <hr>
+      <div class="codigo" aria-hidden="true"></div>
+      <p class="mini centro">Obrigado por refletir sobre o seu tempo.</p>
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
